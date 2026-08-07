@@ -1,0 +1,12 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Ensure bash scripts keep LF line endings
+*.sh text eol=lf
+
+# Denote notation files as text
+*.json text
+*.xml text
+*.yml text
+*.yaml text
+*.md text
