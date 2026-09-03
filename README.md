@@ -108,11 +108,11 @@ docker ps
 ```
 
 ### 3. Backend Setup
-Check if Java 21 is installed on your system:
+Check if Java 25 is installed on your system:
 ```bash
 java -version
 ```
-- [Oracle JDK 21](https://www.oracle.com/pl/java/technologies/downloads/#java21)
+- [Oracle JDK 25](https://www.oracle.com/pl/java/technologies/downloads/#java25)
 
 Apache Maven 3+ is required to build the application. Verify maven installation by running:
 ```bash
