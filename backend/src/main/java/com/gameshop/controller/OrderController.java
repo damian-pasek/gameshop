@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.gameshop.entity.Order;
-import com.gameshop.entity.OrderItems;
+import com.gameshop.entity.OrderItem;
 import com.gameshop.repository.OrderItemRepository;
 import com.gameshop.repository.OrderRepository;
 import com.gameshop.service.OrderResponse;
@@ -29,12 +29,12 @@ public class OrderController {
 
     public static class OrderRequest {
         private Integer userId;
-        private List<OrderItems> items;
+        private List<OrderItem> items;
 
         public Integer getUserId() { return userId; }
         public void setUserId(Integer userId) { this.userId = userId; }
-        public List<OrderItems> getItems() { return items; }
-        public void setItems(List<OrderItems> items) { this.items = items; }
+        public List<OrderItem> getItems() { return items; }
+        public void setItems(List<OrderItem> items) { this.items = items; }
     }
 
     @GetMapping("")
@@ -42,7 +42,7 @@ public class OrderController {
         List<Order> orders = orderRepository.getAll();
         return orders.stream()
             .map(order -> {
-                List<OrderItems> items = orderItemRepository.getByOrderId(order.getId());
+                List<OrderItem> items = orderItemRepository.getByOrderId(order.getId());
                 return new OrderResponse(order, items);
             })
             .toList();
@@ -63,7 +63,7 @@ public class OrderController {
         int orderId = orderRepository.save(order);
 
 
-        for(OrderItems item : request.getItems()) {
+        for(OrderItem item : request.getItems()) {
             item.setOrderId(orderId);
             orderItemRepository.save(item);
         }

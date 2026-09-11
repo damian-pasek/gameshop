@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.gameshop.entity.Users;
+import com.gameshop.entity.User;
 import com.gameshop.service.AuthService;
 
 import java.util.Optional;
@@ -24,10 +24,10 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        Optional<Users> optionalUser = authService.authenticate(request.getUsername(), request.getPassword());
+        Optional<User> optionalUser = authService.authenticate(request.getUsername(), request.getPassword());
 
         if (optionalUser.isPresent()) {
-            Users user = optionalUser.get();
+            User user = optionalUser.get();
             return ResponseEntity.ok(new LoginResponse("Login successful", user.getRole(), user.getId()));
         } else {
             return ResponseEntity.status(401).body("Incorrect login and/or password");
@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         try {
-            Users registeredUser = authService.register(request.getUsername(), request.getPassword());
+            User registeredUser = authService.register(request.getUsername(), request.getPassword());
             return ResponseEntity.ok(new RegisterResponse("Registration successful", registeredUser.getId()));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).body(e.getMessage());

@@ -2,7 +2,7 @@ package com.gameshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gameshop.entity.Users;
+import com.gameshop.entity.User;
 import com.gameshop.repository.UserRepository;
 
 import java.util.Optional;
@@ -17,16 +17,16 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public Optional<Users> authenticate(String username, String password) {
+    public Optional<User> authenticate(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, password);
     }
 
-    public Users register(String username, String password) {
+    public User register(String username, String password) {
         if (userRepository.existsByUsername(username)) {
             throw new IllegalArgumentException("User already exist");
         }
 
-        Users newUser = new Users();
+        User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(password);
         newUser.setRole("user");
