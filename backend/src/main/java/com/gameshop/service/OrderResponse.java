@@ -1,7 +1,7 @@
-package com.gameshop.services;
+package com.gameshop.service;
 
-import com.gameshop.models.Order;
-import com.gameshop.models.OrderItems;
+import com.gameshop.entity.Order;
+import com.gameshop.entity.OrderItems;
 
 import java.util.List;
 

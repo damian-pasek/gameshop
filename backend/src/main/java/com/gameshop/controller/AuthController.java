@@ -1,4 +1,4 @@
-package com.gameshop.controllers;
+package com.gameshop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.gameshop.models.Users;
-import com.gameshop.services.AuthService;
+import com.gameshop.entity.Users;
+import com.gameshop.service.AuthService;
 
 import java.util.Optional;
 

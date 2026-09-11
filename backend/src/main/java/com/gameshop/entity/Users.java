@@ -1,7 +1,4 @@
-package com.gameshop.models;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+package com.gameshop.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Order {
-    @Id
+public class Users{
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer userId;
-    private LocalDateTime orderDate;
-    private BigDecimal totalPrice;
+	private Integer id;
+	private String username;
+	private String password;
+	private String role;
 }

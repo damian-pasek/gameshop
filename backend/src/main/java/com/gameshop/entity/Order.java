@@ -1,8 +1,7 @@
-package com.gameshop.models;
-
-import org.springframework.data.annotation.Transient;
+package com.gameshop.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,15 +15,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class OrderItems {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer orderId;
-    private Integer gameId;
-    private Integer quantity;
-    private BigDecimal unitPrice;
-
-    @Transient
-    private String name;
+    private Integer userId;
+    private LocalDateTime orderDate;
+    private BigDecimal totalPrice;
 }

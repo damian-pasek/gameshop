@@ -1,9 +1,9 @@
-package com.gameshop.services;
+package com.gameshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gameshop.models.Users;
-import com.gameshop.repositories.UserRepository;
+import com.gameshop.entity.Users;
+import com.gameshop.repository.UserRepository;
 
 import java.util.Optional;
 

@@ -1,4 +1,6 @@
-package com.gameshop.models;
+package com.gameshop.entity;
+
+import org.springframework.data.annotation.Transient;
 
 import java.math.BigDecimal;
 
@@ -14,15 +16,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Game {
+public class OrderItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private Integer orderId;
+    private Integer gameId;
     private Integer quantity;
+    private BigDecimal unitPrice;
+
+    @Transient
     private String name;
-    private BigDecimal price;
-    private String imgUrl;
-    private BigDecimal rating;       
-    private String description;      
-    private String tags;
 }

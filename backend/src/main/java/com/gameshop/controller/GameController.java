@@ -1,4 +1,4 @@
-package com.gameshop.controllers;
+package com.gameshop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.gameshop.models.Game;
-import com.gameshop.repositories.GameRepository;
+import com.gameshop.entity.Game;
+import com.gameshop.repository.GameRepository;
 
 import java.util.List;
 

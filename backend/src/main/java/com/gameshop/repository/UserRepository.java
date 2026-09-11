@@ -1,7 +1,7 @@
-package com.gameshop.repositories;
+package com.gameshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.gameshop.models.Users;
+import com.gameshop.entity.Users;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.gameshop.controllers;
+package com.gameshop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.gameshop.models.Order;
-import com.gameshop.models.OrderItems;
-import com.gameshop.repositories.OrderItemRepository;
-import com.gameshop.repositories.OrderRepository;
-import com.gameshop.services.OrderResponse;
+import com.gameshop.entity.Order;
+import com.gameshop.entity.OrderItems;
+import com.gameshop.repository.OrderItemRepository;
+import com.gameshop.repository.OrderRepository;
+import com.gameshop.service.OrderResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
