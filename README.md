@@ -36,9 +36,7 @@ managing inventory, tailored based on user roles (Customer vs. Administrator).
 - **Deployment:** Docker
 
 ## Database Design and Structure
-1. **Entity-Relationship Diagram (ERD):**
-- The relational database schema is designed to efficiently store and manage user data, inventory, and purchase records.
-- [View ERD](./database/data-structure.png)
+The relational database is designed to efficiently store and manage user data, inventory, and purchase records.
 
 2. **Relationships:**
 - Users → Orders: One-to-Many (A user can place multiple orders)
@@ -97,12 +95,16 @@ docker compose version
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Starting the Database
-Use Docker Compose to start the MySQL database container:
+While in database directory, use Docker Compose to start the MySQL database container:
 
 ```bash
-docker compose up -d
+cd /database
 
-#to check if database is running use the following command:
+docker compose up -d
+```
+To check if database is running you can use the following command:
+
+```bash
 docker ps
 #container "gameshop-mysql" should be on the list
 ```
