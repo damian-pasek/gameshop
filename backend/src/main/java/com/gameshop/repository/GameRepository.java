@@ -1,10 +1,10 @@
-package com.gameshop.repositories;
+package com.gameshop.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import com.gameshop.models.Game;
+import com.gameshop.entity.Game;
 
 import java.util.List;
 
