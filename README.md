@@ -32,7 +32,7 @@ managing inventory, tailored based on user roles (Customer vs. Administrator).
 ## Technology Stack
 - **Frontend:** React, TypeScript, Vite, Axios
 - **Backend:** Java, Maven, Spring Boot
-- **Database:** MySQL
+- **Database:** PostgresSQL
 - **Deployment:** Docker
 
 ## Database Design and Structure
@@ -106,7 +106,7 @@ To check if database is running you can use the following command:
 
 ```bash
 docker ps
-#container "gameshop-mysql" should be on the list
+#container "gameshop-db" should be on the list
 ```
 
 ### 3. Backend Setup
