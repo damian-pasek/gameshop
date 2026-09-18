@@ -3,6 +3,7 @@ package com.gameshop.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer userId;
+    @JsonFormat(pattern = "yyyy-MM-dd' 'HH:mm:ss")
     private LocalDateTime orderDate;
     private BigDecimal totalPrice;
 }

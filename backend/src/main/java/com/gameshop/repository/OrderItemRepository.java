@@ -21,7 +21,7 @@ public class OrderItemRepository {
 
     public List<OrderItem> getByOrderId(int orderId) {
         String sql = "SELECT oi.*, g.name AS name FROM order_items oi " +
-                     "JOIN game g ON oi.game_id = g.id " +
+                     "JOIN games g ON oi.game_id = g.id " +
                      "WHERE oi.order_id = ?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(OrderItem.class), orderId);
     }

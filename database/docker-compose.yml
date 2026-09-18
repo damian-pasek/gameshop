@@ -1,16 +1,19 @@
 services:
-  database:
-    image: mysql:8.0
-    container_name: gameshop-mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: gameshop
+  postgres:
+    image: postgres:17
+    container_name: gameshop-db
+    env_file:
+      - .env
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gameshop-network
 
 volumes:
-  mysql_data:
+  postgres_data:
+
+networks:
+  gameshop-network:
+    driver: bridge
