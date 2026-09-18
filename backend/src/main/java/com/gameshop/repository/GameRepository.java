@@ -16,14 +16,14 @@ public class GameRepository {
     
     public List<Game> getAll(){
         return jdbcTemplate.query(
-            "SELECT id, quantity, name, price, imgUrl, rating, description, tags FROM game",
+            "SELECT id, quantity, name, price, img_url, rating, description, tags FROM games",
             BeanPropertyRowMapper.newInstance(Game.class)
         );
     }
     
     public Game getById(int id) {
         return jdbcTemplate.queryForObject(
-            "SELECT id, quantity, name, price, imgUrl, rating, description, tags FROM game WHERE id = ?",
+            "SELECT id, quantity, name, price, img_url, rating, description, tags FROM games WHERE id = ?",
             BeanPropertyRowMapper.newInstance(Game.class),
             id
         );
@@ -31,7 +31,7 @@ public class GameRepository {
 
     public int save(Game game) {
         return jdbcTemplate.update(
-            "INSERT INTO game(quantity, name, price, imgUrl, rating, description, tags) VALUES(?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO games(quantity, name, price, img_url, rating, description, tags) VALUES(?, ?, ?, ?, ?, ?, ?)",
             game.getQuantity(), game.getName(), game.getPrice(), game.getImgUrl(),
             game.getRating(), game.getDescription(), game.getTags()
         );
@@ -39,13 +39,13 @@ public class GameRepository {
     
     public int update(Game game) {
         return jdbcTemplate.update(
-            "UPDATE game SET quantity=?, name=?, price=?, imgUrl=?, rating=?, description=?, tags=? WHERE id=?",
+            "UPDATE games SET quantity=?, name=?, price=?, img_url=?, rating=?, description=?, tags=? WHERE id=?",
             game.getQuantity(), game.getName(), game.getPrice(), game.getImgUrl(),
             game.getRating(), game.getDescription(), game.getTags(), game.getId()
         );
     }
     
     public int delete(int id) {
-        return jdbcTemplate.update("DELETE FROM game WHERE id=?", id);
+        return jdbcTemplate.update("DELETE FROM games WHERE id=?", id);
     }
 }
