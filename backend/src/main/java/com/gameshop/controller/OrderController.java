@@ -1,6 +1,5 @@
 package com.gameshop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,11 +19,13 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
 
-    @Autowired
-    private OrderItemRepository orderItemRepository;
+    public OrderController(OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
+        this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
+    }
 
 
     public static class OrderRequest {
@@ -39,10 +40,10 @@ public class OrderController {
 
     @GetMapping("")
     public List<OrderResponse> getAllOrders() {
-        List<Order> orders = orderRepository.getAll();
+        List<Order> orders = orderRepository.findAll();
         return orders.stream()
             .map(order -> {
-                List<OrderItem> items = orderItemRepository.getByOrderId(order.getId());
+                List<OrderItem> items = orderItemRepository.findByOrderId(order.getId());
                 return new OrderResponse(order, items);
             })
             .toList();
@@ -60,13 +61,12 @@ public class OrderController {
         order.setOrderDate(LocalDateTime.now());
         order.setTotalPrice(totalPrice);
 
-        int orderId = orderRepository.save(order);
-
+        Order savedOrder = orderRepository.save(order);
 
         for(OrderItem item : request.getItems()) {
-            item.setOrderId(orderId);
+            item.setOrderId(savedOrder.getId());
             orderItemRepository.save(item);
         }
-        return orderId;
+        return savedOrder.getId();
     }
 }
