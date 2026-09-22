@@ -18,8 +18,14 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "user_id")
     private Integer userId;
+
     @JsonFormat(pattern = "yyyy-MM-dd' 'HH:mm:ss")
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
+
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 }

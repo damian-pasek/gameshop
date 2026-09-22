@@ -19,7 +19,10 @@ public class Game {
     private Integer quantity;
     private String name;
     private BigDecimal price;
+
+    @Column(name = "img_url")
     private String imgUrl;
+
     private BigDecimal rating;       
     private String description;      
     private String tags;

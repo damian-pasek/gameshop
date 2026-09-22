@@ -1,28 +1,12 @@
 package com.gameshop.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import com.gameshop.entity.OrderItem;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-@Repository
-public class OrderItemRepository {
-
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    public int save(OrderItem item) {
-        String sql = "INSERT INTO order_items(order_id, game_id, quantity, unit_price) VALUES(?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, item.getOrderId(), item.getGameId(), item.getQuantity(), item.getUnitPrice());
-    }
-
-    public List<OrderItem> getByOrderId(int orderId) {
-        String sql = "SELECT oi.*, g.name AS name FROM order_items oi " +
-                     "JOIN games g ON oi.game_id = g.id " +
-                     "WHERE oi.order_id = ?";
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(OrderItem.class), orderId);
-    }
+public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
+    @EntityGraph(attributePaths = "game")
+    List<OrderItem> findByOrderId(Integer orderId);
 }
