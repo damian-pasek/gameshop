@@ -7,13 +7,15 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+    restart: unless-stopped
     networks:
       - gameshop-network
 
 volumes:
-  postgres_data:
+  gameshop-db:
 
 networks:
   gameshop-network:
     driver: bridge
+    name: gameshop-network
