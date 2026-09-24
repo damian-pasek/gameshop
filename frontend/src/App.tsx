@@ -42,7 +42,16 @@ function App() {
                     <Route path="/game/:id" element={<GameDetail />} />
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
-                    {isLoggedIn && <Route path="/payment" element={<PaymentPage />} />}
+                    <Route
+                        path="/payment"
+                        element={
+                            isLoggedIn ? (
+                                <PaymentPage />
+                            ) : (
+                                <Navigate to="/login" state={{ from: "/payment" }} replace />
+                            )
+                        }
+                    />
                     <Route
                         path="/add-game"
                         element={
