@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export function LoginForm() {
@@ -7,6 +7,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation<{ from?: string }>();
   const { login: setLoggedIn } = useAuth();
 
   const loginUser = async (username: string, password: string) => {
@@ -21,7 +22,7 @@ export function LoginForm() {
         const data = await response.json();
         setLoggedIn(data.role, data.userId);
         alert("Logged in successfully");
-        navigate("/");
+        navigate(location.state?.from || "/", { replace: true });
       } else {
         alert("Invalid credentials");
       }
