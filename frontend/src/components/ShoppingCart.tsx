@@ -51,11 +51,9 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
   };
 
   const handleCheckout = () => {
-    if (!isLoggedIn) {
-      navigate("/login", { state: { from: "/payment" } });
-    } else {
-      navigate("/payment"); 
-    }
+    navigate(isLoggedIn ? "/payment" : "/login", {
+      state: isLoggedIn ? undefined : { from: "/payment" },
+    });
   };
 
   return (
@@ -98,13 +96,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
 				  <Button
 				    variant="outline-secondary"
 				    size="sm"
-				    onClick={() => {
-				      if (!isLoggedIn) {
-				        alert("You need to be logged-in to add product to the cart");
-				        return;
-				      }
-				      increaseCartQuantity(cartItem.id);
-				    }}
+				    onClick={() => increaseCartQuantity(cartItem.id)}
 				  >
 				    +
 				  </Button>
@@ -141,13 +133,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
 		  <Button
 		    variant="primary"
 		    className="mt-3"
-		    onClick={() => {
-		      if (!isLoggedIn) {
-		        navigate("/login");
-		      } else {
-		        navigate("/payment");
-		      }
-		    }}
+		    onClick={handleCheckout}
 		  >
 		    Checkout
 		  </Button>
