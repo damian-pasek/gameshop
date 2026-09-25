@@ -32,7 +32,7 @@ managing inventory, tailored based on user roles (Customer vs. Administrator).
 ## Technology Stack
 - **Frontend:** React, TypeScript, Vite, Axios
 - **Backend:** Java, Maven, Spring Boot
-- **Database:** PostgresSQL
+- **Database:** PostgreSQL
 - **Deployment:** Docker
 
 ## Database Design and Structure
@@ -45,34 +45,33 @@ The relational database is designed to efficiently store and manage user data, i
 
 ## API Overview
 
-### Public Endpoints (Accessible to Everyone)
+The frontend communicates with the Spring Boot backend at `http://localhost:8080`.
 
-| Method | Path             | Description               |
-|--------|------------------|---------------------------|
-| POST   | `/auth/login`    | User login                |
-| POST   | `/auth/register` | User registration         |
-| GET    | `/games`         | Fetch all available games |
+### Authentication
 
-### Endpoints for logged-in users
+| Method | Path             | Description |
+|--------|------------------|-------------|
+| POST   | `/auth/login`    | Authenticate a user|
+| POST   | `/auth/register` | Register a customer|
 
-| Method | Path              | Description                                |
-|--------|-------------------|--------------------------------------------|
-| POST   | `/cart`           | Add a game to the shopping cart            |
-| DELETE | `/cart/{gameId}`  | Remove a specific game from the cart       |
-| POST   | `/cart/clear`     | Clear all items from the shopping cart     |
-| POST   | `/checkout`       | Finalize the order and proceed to payment  |
-| POST   | `/orders`         | Save a new order in the database           |
-| GET    | `/orders`         | View personal order history                |
+### Games
 
+| Method | Path          | Description |
+|--------|---------------|-------------|
+| GET    | `/games`      | Fetch all games |
+| GET    | `/games/{id}` | Fetch a game by ID |
+| POST   | `/games`      | Add a new game |
+| PUT    | `/games/{id}` | Replace an existing game's details |
+| PATCH  | `/games/{id}` | Partially update an existing game |
+| DELETE | `/games/{id}` | Delete a game |
 
-### Endpoints for admins
+### Orders
 
-| Method | Path           | Description                              |
-|--------|----------------|------------------------------------------|
-| POST   | `/games`       | Add a new game to the store              |
-| PUT    | `/games/{id}`  | Update existing game details             |
-| DELETE | `/games/{id}`  | Remove a game from the store             |
-| GET    | `/orders`      | View order history for all system users  |
+| Method | Path      | Description |
+|--------|-----------|-------------|
+| GET    | `/orders`  | Fetch all orders with their order items |
+| POST   | `/orders`  | Create an order from the submitted user ID and item list |
+
 
 
 
@@ -80,8 +79,8 @@ The relational database is designed to efficiently store and manage user data, i
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/damian-pasek/Gameshop.git
-cd Gameshop
+git clone https://github.com/damian-pasek/gameshop.git
+cd gameshop
 ```
 
 ### 2. Docker setup
@@ -95,10 +94,10 @@ docker compose version
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Starting the Database
-While in database directory, use Docker Compose to start the MySQL database container:
+While in the database directory, use Docker Compose to start the PostgreSQL database container:
 
 ```bash
-cd /database
+cd database
 
 docker compose up -d
 ```
@@ -120,12 +119,12 @@ Apache Maven 3+ is required to build the application. Verify maven installation 
 ```bash
 mvn -v
 ```
-[Apache Maven](https://maven.apache.org/install.html)
+- [Apache Maven](https://maven.apache.org/install.html)
 
 Next step is to install dependencies and start the backend server:
 
 ```bash
-#navigate to backend directory
+#navigate to backend directory from the root directory
 cd backend
 
 #install dependencies
@@ -133,22 +132,23 @@ mvn clean install
 
 #start the backend server
 mvn spring-boot:run
-
-#the backend server will be active at http://localhost:8080
 ```
+The backend server will be active at http://localhost:8080
+
 ### 4. Frontend Setup
 
-Open new terminal window and navigate to frontend directory:
-
+Verify Node Package Manager installation:
 ```bash
-cd frontend
-
-#Verify Node Package Manager installation:
 npm -v
 ```
-If npm is not installed, download Node.js from here ([Node.js](https://nodejs.org/en/download)), and it will automatically install npm along with it
+If npm is not installed, download Node.js from here ([Node.js](https://nodejs.org/en/download)), and it will automatically install npm along with it.
 
-Next step is to install all frontend packages and to start the Vite development server:
+Open new terminal window in the root directory and navigate to frontend:
+```bash
+cd frontend
+```
+
+The next step is to install all frontend packages and to start the Vite development server:
 
 ```bash
 #install frontend packages
@@ -160,7 +160,7 @@ npm run dev
 The application should start at http://localhost:3000
 
 ### 5. Stopping the application
-1. Pressing Ctrl+C in both terminal windows (backend, fronted) will stop the servers
+1. Pressing Ctrl+C in both terminal windows (backend, frontend) will stop the servers
 2. In the root directory stop and remove the database container:
 ```bash
 docker compose down
@@ -179,4 +179,3 @@ docker compose down -v
 | admin | admin    | haslo    |
 | user  | user     | haslo    |
 | user  | user2    | haslo    |
-
